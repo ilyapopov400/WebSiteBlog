@@ -8,7 +8,11 @@
 
         <div class="col-xl-3 text-center">
             {% if user.is_authenticated %}
-                <p>Добро пожаловать, {{ user.username }}!</p>
+                <p>
+                    Добро пожаловать {{ user.username }} |
+                    <a href="{% url 'registration:logout' %}">выйти</a>
+                </p>
+
             {% else %}
                 <a href="{% url 'registration:login' %}">авторизуйтесь</a>
             {% endif %}

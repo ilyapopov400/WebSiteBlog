@@ -5,5 +5,6 @@ app_name = 'registration'
 
 urlpatterns = [
     path('login/', views.LoginUser.as_view(), name="login"),  # аутентификация пользователя
+    path('logout/', views.LogoutUser.as_view(), name='logout'),  # выход из приложения
 
 ]
