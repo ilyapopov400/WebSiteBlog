@@ -1,0 +1,37 @@
+:root {
+    --color1: #05b1b1;
+    --color2: #52339a;
+}
+
+.header, .top, .footer, .section, .main {
+    padding: 20px 0;
+}
+
+.header, .footer {
+    background-color: var(--color1);
+}
+
+.top, .main {
+    background-color: #eee;
+}
+
+
+a:hover {
+    color: red;
+}
+
+.color1 {
+    color: var(--color1);
+}
+
+.color2 {
+    color: var(--color2);
+}
+
+.bg1 {
+    background-color: var(--color1);
+}
+
+.bg2 {
+    background-color: var(--color2);
+}

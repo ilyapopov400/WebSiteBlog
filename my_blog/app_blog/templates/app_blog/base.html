@@ -5,16 +5,21 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} {% endblock %}</title>
-    <link href="{% static 'app_blog/css/bootstrap.min.css' %}" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="{% static 'app_blog/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'app_blog/img/favicon.ico' %}" rel="shortcat icon" type="image/x-icon">
+    <link href="{% static 'app_blog/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'app_blog/css/fontello.css' %}" rel="stylesheet">
+    <link href="{% static 'app_blog/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
+{% include 'includes/navbar.html' %}
+{% include 'includes/header.html' %}
 
-{% block content %} {% endblock %}
+<div class="main container">
+    {% block content %} {% endblock %}
+</div>
 
-<script src="{% static 'app_blog/js/bootstrap.bundle.js' %}"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+
+{% include 'includes/footer.html' %}
+<script src="{% static 'app_blog/js/bootstrap.bundle.js' %}"></script>
 </body>
 </html>

@@ -1,1 +1,17 @@
-<a><hre</a>
+<div class="container top">
+    <div class="row">
+        <div class="col-xl-3 text-center">
+            <a href="{% url 'app_blog:index' %}">возврат на главную страницу</a>
+        </div>
+
+        <div class="col-xl-6"></div>
+
+        <div class="col-xl-3 text-center">
+            {% if user.is_authenticated %}
+                <p>Добро пожаловать, {{ user.username }}!</p>
+            {% else %}
+                <a href="#">авторизуйтесь</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
