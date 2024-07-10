@@ -1,0 +1,35 @@
+{% extends "app_blog/base.html" %}
+{% load static %}
+{% block title %}
+аутентификация
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center">аутентификация пользователя</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {% for f in form %}
+                    <p><label>{{f.label}}: {{f}}</label></p>
+                {% endfor %}
+                <p>
+                    <button type="submit" class="form-button">Войти в приложение</button>
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div>
+                <a href="#">
+                    Если Вы не зарегистрированы в приложении -> регистрация
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
