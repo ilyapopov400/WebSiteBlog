@@ -8,19 +8,22 @@ my blog
 
 <div class="container">
     <div class="row">
-        <div class="col-xl-3 text-center">
+        <div class="col-xl-4 text-center">
             <h4>зарегистрированные пользователи</h4>
             {% if users_list %}
                 {% for user in users_list %}
                     <ul>
-                        <li>{{ user.username }} <a href="#">перейти к статьям</a></li>
+                        <li>{{ user.username }}
+                            <a href="#">перейти к статьям</a>
+                            <a href="#" class="color2">удалить пользователя</a>
+                        </li>
                     </ul>
                 {% endfor %}
             {% else %}
                 <p>Еще нет зарегистрированных пользователей</p>
             {% endif%}
         </div>
-        <div class="col-xl-9 text-center">
+        <div class="col-xl-8 text-center">
             <h4>посты</h4>
         </div>
     </div>

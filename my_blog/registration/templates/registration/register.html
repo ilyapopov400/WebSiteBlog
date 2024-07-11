@@ -1,0 +1,24 @@
+{% extends "app_blog/base.html" %}
+{% load static %}
+{% block title %}
+аутентификация
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">регистрация пользователя</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    {% for f in form %}
+                        <p><label>{{ f.label }}: {{ f }}</label></p>
+                    {% endfor %}
+                    <p>
+                        <button type="submit" class="form-button">регистрация пользователя</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
