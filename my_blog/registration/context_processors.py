@@ -6,5 +6,10 @@ from django.contrib.auth.models import User
 
 
 def users(request):
-    users_list = User.objects.all()
+    """
+    Передаем в контекст данные по пользователям (superuser - не передаем!)
+    :param request:
+    :return:
+    """
+    users_list = filter(lambda x: x.is_superuser is False, User.objects.all())
     return {'users_list': users_list}
