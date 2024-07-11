@@ -15,7 +15,7 @@ my blog
                     <ul>
                         <li>{{ user.username }}
                             <a href="#">перейти к статьям</a>
-                            <a href="#" class="color2">удалить пользователя</a>
+                            <a href="{% url 'registration:delete_user' user.pk %}" class="color2">удалить пользователя</a>
                         </li>
                     </ul>
                 {% endfor %}
