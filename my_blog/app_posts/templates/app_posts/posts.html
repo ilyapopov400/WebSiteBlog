@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-список постов пользователя
-</body>
-</html>
+{% extends "app_blog/base.html" %}
+{% load static %}
+{% block title %}
+{{ authors }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>Список постов автора {{ authors }}</h3>
+        </div>
+    </div>
+</div>
+{% if posts_author %}
+    {% for post in posts_author %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h4>{{ post.title }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                        {{ post.content }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <p>У автора пока нет постов</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

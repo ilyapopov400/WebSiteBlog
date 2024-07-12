@@ -17,15 +17,15 @@ class Posts(models.Model):
                                        auto_now_add=True)  # дата и время создания поста, устанавливается при создании
     date_change = models.DateTimeField(verbose_name="дата и время изменения поста",
                                        auto_now=True)  # дата и время изменения поста, изменяется при изменении
-    autor = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="автор поста")  # ссылка на модель User
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="автор поста")  # ссылка на модель User
 
     def __str__(self):
-        return "{} - {}".format(self.autor, self.title)
+        return "{} - {}".format(self.author, self.title)
 
     class Meta:
         verbose_name = 'пост пользователя'
         verbose_name_plural = 'посты пользователей'
-        ordering = ["autor"]
+        ordering = ["author"]
 
     def get_absolute_url(self):
         return "/posts/{}/".format(self.pk)

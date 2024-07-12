@@ -4,6 +4,6 @@ from . import views
 app_name = 'app_posts'
 
 urlpatterns = [
-    path('', views.PostsUser.as_view(), name="posts_user"),
+    path('author/<int:pk>/', views.PostsUser.as_view(), name="posts_user"),
 
 ]
