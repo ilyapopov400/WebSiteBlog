@@ -1,0 +1,19 @@
+{% extends "app_blog/base.html" %}
+{% load static %}
+{% block title %}
+отказ в праве доступа
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {% if user.is_authenticated %}
+                <h3 class="text-center text-bg-light">отказ в праве доступа для пользователя {{ user.username }}</h3>
+            {% else %}
+                <h3 class="text-center text-bg-light">отказ в праве доступа</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

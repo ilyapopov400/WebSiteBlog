@@ -9,6 +9,12 @@
         <div class="row">
             <div class="col-12">
                 <h1>Здесь можно удалить пользователя {{ object.username }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <button type="submit">Удалить пользователя</button>

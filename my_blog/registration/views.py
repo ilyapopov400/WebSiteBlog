@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
 
 from . import forms
+from . import utils
 from django.contrib.auth.models import User
 
 
@@ -54,10 +55,15 @@ class LogoutUser(LogoutView):
         return reverse_lazy("app_blog:index")
 
 
-class DeleteUser(DeleteView):  # TODO сделать Mixin, только для администратора
+class DeleteUser(utils.OnlySuperuserMixin, DeleteView):
     """
     Удалить пользователя
+    При использовании utils.OnlySuperuser возможно только с правами superuser
     """
     template_name = "registration/delete_user.html"
     model = User
     success_url = reverse_lazy("app_blog:index")
+
+
+class NoAccessRights(TemplateView):
+    template_name = "registration/no_access_rights.html"

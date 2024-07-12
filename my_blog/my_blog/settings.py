@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_blog.apps.AppBlogConfig',  # зарегистрировали приложение app_blog
     'registration.apps.RegistrationConfig',  # зарегистрировали приложение registration
+    'app_posts.apps.AppPostsConfig',  # зарегистрировали приложение app_posts
 ]
 
 MIDDLEWARE = [
