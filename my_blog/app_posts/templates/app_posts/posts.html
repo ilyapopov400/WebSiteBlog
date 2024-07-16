@@ -1,3 +1,4 @@
+<!--все посты автора-->
 {% extends "app_blog/base.html" %}
 {% load static %}
 {% block title %}
@@ -12,24 +13,30 @@
         </div>
     </div>
 </div>
-{% if posts_author %}
-    {% for post in posts_author %}
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h4>{{ post.title }}</h4>
-                </div>
+
+{% for post in posts_author %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h4>{{ post.title }}</h4>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                        {{ post.content }}
-                </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                    {{ post.content | slice:":500" }} ......
             </div>
         </div>
-    {% endfor %}
-{% else %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a href="{% url 'app_posts:posts_user_one' post.pk %}">перейти к посту</a>
+            </div>
+        </div>
+    </div>
+{% empty %}
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -37,5 +44,5 @@
         </div>
     </div>
 </div>
-{% endif %}
+{% endfor %}
 {% endblock %}

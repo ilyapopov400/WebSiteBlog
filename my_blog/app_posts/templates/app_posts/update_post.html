@@ -1,0 +1,20 @@
+<!--редактирование поста-->
+{% extends "app_blog/base.html" %}
+{% load static %}
+{% block title %}
+{{ post.title }} редактирование
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="изменить">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
