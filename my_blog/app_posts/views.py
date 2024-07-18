@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views.generic import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
 
 from django.contrib.auth.models import User
 from . import models
@@ -36,6 +37,7 @@ class PostsUser(DetailView):
 class PostCreate(CreateView):
     """
     - создать новый пост
+    - при использовании "def dispatch()" доступ только автору страницы
     """
     template_name = "app_posts/create_post.html"
     model = models.Posts
@@ -51,6 +53,16 @@ class PostCreate(CreateView):
         fields.save()
         return super().form_valid(form)
 
+    def dispatch(self, request, *args, **kwargs):
+        """
+        - доступ только автору поста
+        """
+        author = self.kwargs.get("pk")
+
+        if request.user.pk == author:
+            return super().dispatch(request, *args, **kwargs)
+        return HttpResponseRedirect(reverse('registration:no_access_right'))
+
     def get_success_url(self):
         pk = self.kwargs['pk']
         return reverse_lazy('app_posts:posts_user', kwargs={'pk': pk})
@@ -65,10 +77,10 @@ class PostUserOne(DetailView):
     context_object_name = "post"
 
 
-class PostUpdate(utils.OnlySuperuserAndAutorMixin, UpdateView):
+class PostUpdate(UpdateView):
     """
     - редактировать один пост
-    - при использовании "utils.OnlySuperuserAndAutorMixin" разрешается только superuser и автору поста
+    - при использовании "def dispatch()" разрешается только автору поста
     """
     template_name = "app_posts/update_post.html"
     model = models.Posts
@@ -76,13 +88,28 @@ class PostUpdate(utils.OnlySuperuserAndAutorMixin, UpdateView):
 
     def get_success_url(self):
         pk = self.kwargs['pk']
-        return reverse_lazy('app_posts:posts_user', kwargs={'pk': pk})
+        return reverse_lazy('app_posts:posts_user_one', kwargs={'pk': pk})
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+        - доступ только автору поста
+        """
+        author = self.model.objects.all().get(pk=self.kwargs.get("pk")).author.pk
+
+        if request.user.pk == author:
+            return super().dispatch(request, *args, **kwargs)
+        return HttpResponseRedirect(reverse('registration:no_access_right'))
 
 
-class PostDelete(DeleteView):  # TODO
+class PostDelete(utils.OnlySuperuserMixin, DeleteView):
     """
     - удалить пост
+    - при использовании "utils.OnlySuperuserMixin" доступ только для "superuser"
     """
-    template_name = "app_post/delete_post.html"
+    template_name = "app_posts/delete_post.html"
     model = models.Posts
-    success_url = reverse_lazy("app_posts:list_houses")  # TODO
+    success_url = reverse_lazy("app_posts:list_houses")
+
+    def get_success_url(self):
+        author = self.model.objects.all().get(pk=self.kwargs.get("pk")).author.pk
+        return reverse_lazy('app_posts:posts_user', kwargs={'pk': author})

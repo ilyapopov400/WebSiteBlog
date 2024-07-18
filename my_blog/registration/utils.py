@@ -18,14 +18,27 @@ class OnlySuperuserMixin:
         return super().dispatch(request, *args, **kwargs)
 
 
-class OnlySuperuserAndAutorMixin:
-    """
-    С помощью этого класса даем доступ только для 'superuser' и автора поста
-    """
+# class OnlySuperuserAndAuthorMixin:
+#     """
+#     С помощью этого класса даем доступ только для 'superuser' и автора поста
+#     """
+#
+#     def dispatch(self, request, *args, **kwargs):
+#         author = models.Posts.objects.all().get(pk=kwargs.get("pk"))
+#
+#         if request.user.is_superuser or request.user.pk == author.author.pk:
+#             return super().dispatch(request, *args, **kwargs)
+#         return HttpResponseRedirect(reverse('registration:no_access_right'))
 
-    def dispatch(self, request, *args, **kwargs):
-        author = models.Posts.objects.all().get(pk=kwargs.get("pk"))
 
-        if request.user.is_superuser or request.user.pk == author.author.pk:
-            return super().dispatch(request, *args, **kwargs)
-        return HttpResponseRedirect(reverse('registration:no_access_right'))
+# class OnlyAuthorMixin:  # TODO
+#     """
+#     С помощью этого класса даем доступ только для автора поста
+#     """
+#
+#     def dispatch(self, request, *args, **kwargs):
+#         author = models.Posts.objects.all().get(pk=kwargs.get("pk"))
+#
+#         if request.user.pk == request.user.pk == author.author.pk:
+#             return super().dispatch(request, *args, **kwargs)
+#         return HttpResponseRedirect(reverse('registration:no_access_right'))

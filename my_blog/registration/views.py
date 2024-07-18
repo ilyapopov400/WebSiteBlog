@@ -58,7 +58,7 @@ class LogoutUser(LogoutView):
 class DeleteUser(utils.OnlySuperuserMixin, DeleteView):
     """
     Удалить пользователя
-    При использовании utils.OnlySuperuser возможно только с правами superuser
+    При использовании "utils.OnlySuperuser" возможно только с правами superuser
     """
     template_name = "registration/delete_user.html"
     model = User
@@ -66,4 +66,7 @@ class DeleteUser(utils.OnlySuperuserMixin, DeleteView):
 
 
 class NoAccessRights(TemplateView):
+    """
+    - переход на страницу, с информированием об отсутствии прав доступа
+    """
     template_name = "registration/no_access_rights.html"

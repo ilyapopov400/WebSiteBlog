@@ -22,11 +22,14 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        <div class="col-4">
             <a href="{% url 'app_posts:posts_user' post.author.pk %}">вернуться к списку постов автора {{ post.author }}</a>
         </div>
-        <div class="col-6">
+        <div class="col-4">
             <a href="{% url 'app_posts:post_update' post.pk %}">редактирование поста (только для автора поста)</a>
+        </div>
+        <div class="col-4">
+            <a href="{% url 'app_posts:post_delete' post.pk %}">удаление поста (только для администратора)</a>
         </div>
     </div>
 </div>
