@@ -1,0 +1,20 @@
+<!--создать новый пост автора-->
+{% extends "app_blog/base.html" %}
+{% load static %}
+{% block title %}
+создать пост
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="сохранить">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

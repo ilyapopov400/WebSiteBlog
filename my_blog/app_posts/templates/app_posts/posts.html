@@ -32,7 +32,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a href="{% url 'app_posts:posts_user_one' post.pk %}">перейти к посту</a>
+                <a href="{{ post.get_absolute_url }}">перейти к посту</a>
             </div>
         </div>
     </div>
@@ -45,4 +45,11 @@
     </div>
 </div>
 {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-start">
+            <a href="{% url 'app_posts:posts_create' authors.pk %}">создать новый пост автора {{ authors.username }}</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

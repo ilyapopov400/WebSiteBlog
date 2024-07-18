@@ -33,6 +33,29 @@ class PostsUser(DetailView):
         return context
 
 
+class PostCreate(CreateView):
+    """
+    - создать новый пост
+    """
+    template_name = "app_posts/create_post.html"
+    model = models.Posts
+    fields = ['title', 'content']
+
+    # Функция для кастомной валидации полей формы модели
+    def form_valid(self, form):
+        fields = form.save(commit=False)
+        # создаем форму, но не отправляем его в БД, пока просто держим в памяти
+        # Через реквест передаем недостающую форму, которая обязательна
+        fields.author = User.objects.get(pk=self.kwargs.get("pk"))
+        # Наконец сохраняем в БД
+        fields.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        return reverse_lazy('app_posts:posts_user', kwargs={'pk': pk})
+
+
 class PostUserOne(DetailView):
     """
     - показать один пост автора
@@ -53,4 +76,13 @@ class PostUpdate(utils.OnlySuperuserAndAutorMixin, UpdateView):
 
     def get_success_url(self):
         pk = self.kwargs['pk']
-        return reverse_lazy('app_posts:posts_user_one', kwargs={'pk': pk})
+        return reverse_lazy('app_posts:posts_user', kwargs={'pk': pk})
+
+
+class PostDelete(DeleteView):  # TODO
+    """
+    - удалить пост
+    """
+    template_name = "app_post/delete_post.html"
+    model = models.Posts
+    success_url = reverse_lazy("app_posts:list_houses")  # TODO

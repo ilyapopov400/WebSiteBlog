@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 
+from django.shortcuts import reverse
+
 
 # Create your models here.
 
@@ -28,5 +30,5 @@ class Posts(models.Model):
         ordering = ["author"]
 
     def get_absolute_url(self):
-        return "/posts/{}/".format(self.pk)
-        # return "/posts/%i/" % self.pk
+        # return "/post/{}/".format(self.pk)
+        return reverse('app_posts:posts_user_one', kwargs={'pk': self.pk})
